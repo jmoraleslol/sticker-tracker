@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { SECTIONS, CONFEDERATION_ORDER } from '../data/stickers'
 
 const FILTERS = ['All', 'Missing', 'Owned', 'Duplicates']
@@ -24,14 +24,18 @@ export default function AlbumView({ counts, updateCount }) {
       return oi - oj
     })
     .map(section => {
+      const q = search.toLowerCase()
+      const sectionMatches = search && (
+        section.name.toLowerCase().includes(q) ||
+        section.id.toLowerCase().includes(q)
+      )
       const stickers = section.stickers.filter(s => {
         const c = counts[s.code] ?? 0
         if (filter === 'Missing'    && c > 0)  return false
         if (filter === 'Owned'      && c < 1)  return false
         if (filter === 'Duplicates' && c < 2)  return false
         if (search) {
-          const q = search.toLowerCase()
-          return s.code.toLowerCase().includes(q) || s.name.toLowerCase().includes(q)
+          return sectionMatches || s.code.toLowerCase().includes(q)
         }
         return true
       })
@@ -45,7 +49,7 @@ export default function AlbumView({ counts, updateCount }) {
       <div className="sticky top-0 z-10 bg-white border-b border-gray-100 px-3 py-2 space-y-2">
         <input
           type="search"
-          placeholder="Search sticker code or name…"
+          placeholder="Search country or sticker code (e.g. RSA, ARG3)…"
           value={search}
           onChange={e => setSearch(e.target.value)}
           className="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm outline-none focus:border-panini-blue"
@@ -71,7 +75,7 @@ export default function AlbumView({ counts, updateCount }) {
       <div className="divide-y divide-gray-100">
         {filteredSections.map(section => {
           const sectionOwned = section.stickers.filter(s => (counts[s.code] ?? 0) >= 1).length
-          const isOpen = expandedSections.has(section.id)
+          const isOpen = search ? true : expandedSections.has(section.id)
 
           return (
             <div key={section.id}>
@@ -120,38 +124,39 @@ export default function AlbumView({ counts, updateCount }) {
 }
 
 function StickerCard({ sticker, count, onAdd, onRemove }) {
-  const pressTimer = useRef(null)
-
-  const handlePressStart = () => {
-    pressTimer.current = setTimeout(() => {
-      if (count > 0) onRemove()
-    }, 500)
-  }
-  const handlePressEnd = () => clearTimeout(pressTimer.current)
-
   const bg =
     count === 0 ? 'bg-gray-100 text-gray-400 border-gray-200' :
     count === 1 ? 'bg-green-50 text-green-700 border-green-300' :
                   'bg-amber-50 text-amber-700 border-amber-300'
 
   return (
-    <button
-      onClick={onAdd}
-      onMouseDown={handlePressStart}
-      onMouseUp={handlePressEnd}
-      onTouchStart={handlePressStart}
-      onTouchEnd={handlePressEnd}
-      className={`relative rounded-lg border aspect-square flex flex-col items-center justify-center p-1 transition-all active:scale-95 select-none ${bg}`}
-    >
-      {sticker.foil && count >= 1 && (
-        <span className="absolute top-0.5 right-0.5 text-[8px]">✨</span>
+    <div className={`relative rounded-lg border aspect-square select-none ${bg}`}>
+      {/* Main tap area — adds one */}
+      <button
+        onClick={onAdd}
+        className="absolute inset-0 flex items-center justify-center active:scale-95 transition-all rounded-lg"
+      >
+        {sticker.foil && count >= 1 && (
+          <span className="absolute top-0.5 right-0.5 text-[8px]">✨</span>
+        )}
+        <span className="text-[9px] font-bold leading-tight text-center px-0.5">{sticker.code}</span>
+        {count > 1 && (
+          <span className="absolute top-0.5 left-0.5 bg-amber-500 text-white text-[8px] font-bold rounded-full w-3.5 h-3.5 flex items-center justify-center">
+            {count}
+          </span>
+        )}
+      </button>
+
+      {/* Minus button — visible when owned */}
+      {count > 0 && (
+        <button
+          onClick={e => { e.stopPropagation(); onRemove() }}
+          className="absolute bottom-0 right-0 w-4 h-4 bg-red-400 hover:bg-red-500 text-white rounded-tl-md rounded-br-md flex items-center justify-center text-[10px] font-bold leading-none active:bg-red-600"
+          aria-label="Remove one"
+        >
+          −
+        </button>
       )}
-      <span className="text-[9px] font-bold leading-tight text-center">{sticker.code}</span>
-      {count > 1 && (
-        <span className="absolute bottom-0.5 right-0.5 bg-amber-500 text-white text-[8px] font-bold rounded-full w-3.5 h-3.5 flex items-center justify-center">
-          {count}
-        </span>
-      )}
-    </button>
+    </div>
   )
 }
