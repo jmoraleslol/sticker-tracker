@@ -1,4 +1,5 @@
-// Team list sourced from official Panini FIFA World Cup 2026 sticker album checklist.
+// Team list and order sourced from the official Panini FIFA World Cup 2026 sticker album.
+// Teams are ordered exactly as they appear in the album: Group A through Group L.
 
 const FWC_STICKERS = [
   { code: 'FWC1',  name: 'Official Emblem',       foil: true  },
@@ -23,63 +24,69 @@ const FWC_STICKERS = [
   { code: 'FWC20', name: 'Argentina 2022',         foil: false },
 ]
 
-// 48 teams × 20 stickers = 960 + 20 FWC = 980 total
-// Sticker 1 = Team Badge (FOIL), Sticker 2 = Team Photo, Stickers 3-20 = Players
+// Teams in exact album order (Group A → Group L), 20 stickers per team.
+// Sticker 1 = Team Badge (FOIL), Sticker 2 = Team Photo, Stickers 3-20 = Players.
 export const TEAMS = [
-  // CONCACAF (6 teams)
-  { code: 'USA', name: 'United States',          flag: '🇺🇸', confederation: 'CONCACAF' },
-  { code: 'MEX', name: 'Mexico',                 flag: '🇲🇽', confederation: 'CONCACAF' },
-  { code: 'CAN', name: 'Canada',                 flag: '🇨🇦', confederation: 'CONCACAF' },
-  { code: 'PAN', name: 'Panama',                 flag: '🇵🇦', confederation: 'CONCACAF' },
-  { code: 'CUW', name: 'Curaçao',               flag: '🇨🇼', confederation: 'CONCACAF' },
-  { code: 'HAI', name: 'Haiti',                  flag: '🇭🇹', confederation: 'CONCACAF' },
-  // CONMEBOL (6 teams)
-  { code: 'ARG', name: 'Argentina',              flag: '🇦🇷', confederation: 'CONMEBOL' },
-  { code: 'BRA', name: 'Brazil',                 flag: '🇧🇷', confederation: 'CONMEBOL' },
-  { code: 'COL', name: 'Colombia',               flag: '🇨🇴', confederation: 'CONMEBOL' },
-  { code: 'ECU', name: 'Ecuador',                flag: '🇪🇨', confederation: 'CONMEBOL' },
-  { code: 'URU', name: 'Uruguay',                flag: '🇺🇾', confederation: 'CONMEBOL' },
-  { code: 'PAR', name: 'Paraguay',               flag: '🇵🇾', confederation: 'CONMEBOL' },
-  // UEFA (16 teams)
-  { code: 'GER', name: 'Germany',                flag: '🇩🇪', confederation: 'UEFA' },
-  { code: 'FRA', name: 'France',                 flag: '🇫🇷', confederation: 'UEFA' },
-  { code: 'ESP', name: 'Spain',                  flag: '🇪🇸', confederation: 'UEFA' },
-  { code: 'ENG', name: 'England',                flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', confederation: 'UEFA' },
-  { code: 'POR', name: 'Portugal',               flag: '🇵🇹', confederation: 'UEFA' },
-  { code: 'NED', name: 'Netherlands',            flag: '🇳🇱', confederation: 'UEFA' },
-  { code: 'BEL', name: 'Belgium',                flag: '🇧🇪', confederation: 'UEFA' },
-  { code: 'SUI', name: 'Switzerland',            flag: '🇨🇭', confederation: 'UEFA' },
-  { code: 'CRO', name: 'Croatia',                flag: '🇭🇷', confederation: 'UEFA' },
-  { code: 'AUT', name: 'Austria',                flag: '🇦🇹', confederation: 'UEFA' },
-  { code: 'TUR', name: 'Türkiye',                flag: '🇹🇷', confederation: 'UEFA' },
-  { code: 'NOR', name: 'Norway',                 flag: '🇳🇴', confederation: 'UEFA' },
-  { code: 'SCO', name: 'Scotland',               flag: '🏴󠁧󠁢󠁳󠁣󠁴󠁿', confederation: 'UEFA' },
-  { code: 'SWE', name: 'Sweden',                 flag: '🇸🇪', confederation: 'UEFA' },
-  { code: 'CZE', name: 'Czechia',                flag: '🇨🇿', confederation: 'UEFA' },
-  { code: 'BIH', name: 'Bosnia and Herzegovina', flag: '🇧🇦', confederation: 'UEFA' },
-  // CAF – Africa (10 teams)
-  { code: 'MAR', name: 'Morocco',                flag: '🇲🇦', confederation: 'CAF' },
-  { code: 'SEN', name: 'Senegal',                flag: '🇸🇳', confederation: 'CAF' },
-  { code: 'EGY', name: 'Egypt',                  flag: '🇪🇬', confederation: 'CAF' },
-  { code: 'CIV', name: "Côte d'Ivoire",         flag: '🇨🇮', confederation: 'CAF' },
-  { code: 'GHA', name: 'Ghana',                  flag: '🇬🇭', confederation: 'CAF' },
-  { code: 'COD', name: 'DR Congo',               flag: '🇨🇩', confederation: 'CAF' },
-  { code: 'TUN', name: 'Tunisia',                flag: '🇹🇳', confederation: 'CAF' },
-  { code: 'ALG', name: 'Algeria',                flag: '🇩🇿', confederation: 'CAF' },
-  { code: 'RSA', name: 'South Africa',           flag: '🇿🇦', confederation: 'CAF' },
-  { code: 'CPV', name: 'Cape Verde',             flag: '🇨🇻', confederation: 'CAF' },
-  // AFC – Asia (9 teams)
-  { code: 'JPN', name: 'Japan',                  flag: '🇯🇵', confederation: 'AFC' },
-  { code: 'KOR', name: 'South Korea',            flag: '🇰🇷', confederation: 'AFC' },
-  { code: 'AUS', name: 'Australia',              flag: '🇦🇺', confederation: 'AFC' },
-  { code: 'KSA', name: 'Saudi Arabia',           flag: '🇸🇦', confederation: 'AFC' },
-  { code: 'IRN', name: 'Iran',                   flag: '🇮🇷', confederation: 'AFC' },
-  { code: 'IRQ', name: 'Iraq',                   flag: '🇮🇶', confederation: 'AFC' },
-  { code: 'JOR', name: 'Jordan',                 flag: '🇯🇴', confederation: 'AFC' },
-  { code: 'UZB', name: 'Uzbekistan',             flag: '🇺🇿', confederation: 'AFC' },
-  { code: 'QAT', name: 'Qatar',                  flag: '🇶🇦', confederation: 'AFC' },
-  // OFC (1 team)
-  { code: 'NZL', name: 'New Zealand',            flag: '🇳🇿', confederation: 'OFC' },
+  // ── Group A ──────────────────────────────────────
+  { code: 'MEX', name: 'Mexico',                 flag: '🇲🇽', confederation: 'CONCACAF', group: 'A' },
+  { code: 'KOR', name: 'South Korea',            flag: '🇰🇷', confederation: 'AFC',      group: 'A' },
+  { code: 'RSA', name: 'South Africa',           flag: '🇿🇦', confederation: 'CAF',      group: 'A' },
+  { code: 'CZE', name: 'Czechia',                flag: '🇨🇿', confederation: 'UEFA',     group: 'A' },
+  // ── Group B ──────────────────────────────────────
+  { code: 'CAN', name: 'Canada',                 flag: '🇨🇦', confederation: 'CONCACAF', group: 'B' },
+  { code: 'SUI', name: 'Switzerland',            flag: '🇨🇭', confederation: 'UEFA',     group: 'B' },
+  { code: 'QAT', name: 'Qatar',                  flag: '🇶🇦', confederation: 'AFC',      group: 'B' },
+  { code: 'BIH', name: 'Bosnia and Herzegovina', flag: '🇧🇦', confederation: 'UEFA',     group: 'B' },
+  // ── Group C ──────────────────────────────────────
+  { code: 'BRA', name: 'Brazil',                 flag: '🇧🇷', confederation: 'CONMEBOL', group: 'C' },
+  { code: 'MAR', name: 'Morocco',                flag: '🇲🇦', confederation: 'CAF',      group: 'C' },
+  { code: 'HAI', name: 'Haiti',                  flag: '🇭🇹', confederation: 'CONCACAF', group: 'C' },
+  { code: 'SCO', name: 'Scotland',               flag: '🏴󠁧󠁢󠁳󠁣󠁴󠁿', confederation: 'UEFA',     group: 'C' },
+  // ── Group D ──────────────────────────────────────
+  { code: 'USA', name: 'United States',          flag: '🇺🇸', confederation: 'CONCACAF', group: 'D' },
+  { code: 'PAR', name: 'Paraguay',               flag: '🇵🇾', confederation: 'CONMEBOL', group: 'D' },
+  { code: 'AUS', name: 'Australia',              flag: '🇦🇺', confederation: 'AFC',      group: 'D' },
+  { code: 'TUR', name: 'Türkiye',                flag: '🇹🇷', confederation: 'UEFA',     group: 'D' },
+  // ── Group E ──────────────────────────────────────
+  { code: 'GER', name: 'Germany',                flag: '🇩🇪', confederation: 'UEFA',     group: 'E' },
+  { code: 'CUW', name: 'Curaçao',               flag: '🇨🇼', confederation: 'CONCACAF', group: 'E' },
+  { code: 'CIV', name: "Côte d'Ivoire",         flag: '🇨🇮', confederation: 'CAF',      group: 'E' },
+  { code: 'ECU', name: 'Ecuador',                flag: '🇪🇨', confederation: 'CONMEBOL', group: 'E' },
+  // ── Group F ──────────────────────────────────────
+  { code: 'NED', name: 'Netherlands',            flag: '🇳🇱', confederation: 'UEFA',     group: 'F' },
+  { code: 'JPN', name: 'Japan',                  flag: '🇯🇵', confederation: 'AFC',      group: 'F' },
+  { code: 'TUN', name: 'Tunisia',                flag: '🇹🇳', confederation: 'CAF',      group: 'F' },
+  { code: 'SWE', name: 'Sweden',                 flag: '🇸🇪', confederation: 'UEFA',     group: 'F' },
+  // ── Group G ──────────────────────────────────────
+  { code: 'BEL', name: 'Belgium',                flag: '🇧🇪', confederation: 'UEFA',     group: 'G' },
+  { code: 'EGY', name: 'Egypt',                  flag: '🇪🇬', confederation: 'CAF',      group: 'G' },
+  { code: 'IRN', name: 'Iran',                   flag: '🇮🇷', confederation: 'AFC',      group: 'G' },
+  { code: 'NZL', name: 'New Zealand',            flag: '🇳🇿', confederation: 'OFC',      group: 'G' },
+  // ── Group H ──────────────────────────────────────
+  { code: 'ESP', name: 'Spain',                  flag: '🇪🇸', confederation: 'UEFA',     group: 'H' },
+  { code: 'CPV', name: 'Cape Verde',             flag: '🇨🇻', confederation: 'CAF',      group: 'H' },
+  { code: 'KSA', name: 'Saudi Arabia',           flag: '🇸🇦', confederation: 'AFC',      group: 'H' },
+  { code: 'URU', name: 'Uruguay',                flag: '🇺🇾', confederation: 'CONMEBOL', group: 'H' },
+  // ── Group I ──────────────────────────────────────
+  { code: 'FRA', name: 'France',                 flag: '🇫🇷', confederation: 'UEFA',     group: 'I' },
+  { code: 'SEN', name: 'Senegal',                flag: '🇸🇳', confederation: 'CAF',      group: 'I' },
+  { code: 'IRQ', name: 'Iraq',                   flag: '🇮🇶', confederation: 'AFC',      group: 'I' },
+  { code: 'NOR', name: 'Norway',                 flag: '🇳🇴', confederation: 'UEFA',     group: 'I' },
+  // ── Group J ──────────────────────────────────────
+  { code: 'ARG', name: 'Argentina',              flag: '🇦🇷', confederation: 'CONMEBOL', group: 'J' },
+  { code: 'ALG', name: 'Algeria',                flag: '🇩🇿', confederation: 'CAF',      group: 'J' },
+  { code: 'AUT', name: 'Austria',                flag: '🇦🇹', confederation: 'UEFA',     group: 'J' },
+  { code: 'JOR', name: 'Jordan',                 flag: '🇯🇴', confederation: 'AFC',      group: 'J' },
+  // ── Group K ──────────────────────────────────────
+  { code: 'POR', name: 'Portugal',               flag: '🇵🇹', confederation: 'UEFA',     group: 'K' },
+  { code: 'COD', name: 'DR Congo',               flag: '🇨🇩', confederation: 'CAF',      group: 'K' },
+  { code: 'UZB', name: 'Uzbekistan',             flag: '🇺🇿', confederation: 'AFC',      group: 'K' },
+  { code: 'COL', name: 'Colombia',               flag: '🇨🇴', confederation: 'CONMEBOL', group: 'K' },
+  // ── Group L ──────────────────────────────────────
+  { code: 'ENG', name: 'England',                flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', confederation: 'UEFA',     group: 'L' },
+  { code: 'CRO', name: 'Croatia',                flag: '🇭🇷', confederation: 'UEFA',     group: 'L' },
+  { code: 'GHA', name: 'Ghana',                  flag: '🇬🇭', confederation: 'CAF',      group: 'L' },
+  { code: 'PAN', name: 'Panama',                 flag: '🇵🇦', confederation: 'CONCACAF', group: 'L' },
 ]
 
 function buildTeamStickers(team) {
@@ -101,6 +108,7 @@ export const SECTIONS = [
     type: 'intro',
     flag: '🌍',
     confederation: 'INTRO',
+    group: null,
     stickers: FWC_STICKERS,
   },
   ...TEAMS.map(team => ({
@@ -109,12 +117,12 @@ export const SECTIONS = [
     type: 'team',
     flag: team.flag,
     confederation: team.confederation,
+    group: team.group,
     stickers: buildTeamStickers(team),
   })),
 ]
 
 export const ALL_STICKERS = SECTIONS.flatMap(s => s.stickers)
+export const TOTAL = ALL_STICKERS.length  // 980
 
-export const TOTAL = ALL_STICKERS.length // should be 980
-
-export const CONFEDERATION_ORDER = ['INTRO', 'CONCACAF', 'CONMEBOL', 'UEFA', 'CAF', 'AFC', 'OFC']
+export const GROUPS = ['A','B','C','D','E','F','G','H','I','J','K','L']

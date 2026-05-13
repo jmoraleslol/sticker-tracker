@@ -1,8 +1,9 @@
 const TABS = [
-  { id: 'dashboard',  label: 'Dashboard', icon: '📊' },
-  { id: 'album',      label: 'Album',     icon: '📖' },
-  { id: 'duplicates', label: 'Extras',    icon: '🔁' },
-  { id: 'trades',     label: 'Trades',    icon: '🤝' },
+  { id: 'dashboard',  label: 'Stats',  icon: '📊' },
+  { id: 'album',      label: 'Album',  icon: '📖' },
+  { id: 'duplicates', label: 'Extras', icon: '🔁' },
+  { id: 'trades',     label: 'Trades', icon: '🤝' },
+  { id: 'blue',       label: 'Blue',   icon: '🔵' },
 ]
 
 export default function BottomNav({ tab, setTab, totalDupes }) {
@@ -20,7 +21,7 @@ export default function BottomNav({ tab, setTab, totalDupes }) {
             <span className="text-xl leading-none">{t.icon}</span>
             <span className="text-[10px] font-medium">{t.label}</span>
             {t.id === 'duplicates' && totalDupes > 0 && (
-              <span className="absolute top-1.5 right-1/4 bg-panini-red text-white text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
+              <span className="absolute top-1.5 right-1 bg-panini-red text-white text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
                 {totalDupes > 99 ? '99+' : totalDupes}
               </span>
             )}
